@@ -1,4 +1,5 @@
-Selenium. Different browsers.
+# SeleniumDifferentBrowsers
+Task 9. Selenium. Different browsers.
 
 Project is navigating to the https://google.com, searched 'SoftServe', verify that at least one of the results of search contain 'softserve', navigating to the softserve link and verify that url is contain 'softserve'.
 
