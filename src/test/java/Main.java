@@ -1,12 +1,15 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.*;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
-import org.openqa.selenium.WebDriver;
 
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+
+import static com.sun.deploy.cache.Cache.copyFile;
+
 
 public class Main {
 
@@ -75,6 +78,17 @@ public class Main {
     }
 
     @AfterMethod
+    public void takeScreenshot(ITestResult result) {
+        if (!result.isSuccess()) try {
+            File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            copyFile(scrFile, new File(result.getName() + "[" + LocalDate.now() + "][" + System.currentTimeMillis() + "].png"));
+        } catch (
+                IOException e) { e.printStackTrace();
+
+        }
+    }
+
+    @AfterClass
     public void closeBrowser () {
         driver.quit();
     }
